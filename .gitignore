@@ -3,4 +3,4 @@ go_graphql
 .DS_Store
 config/app.yaml
 vendor
-go.sum
+#go.sum
