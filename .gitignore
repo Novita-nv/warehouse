@@ -1,0 +1,6 @@
+go_graphql
+.idea
+.DS_Store
+config/app.yaml
+vendor
+go.sum

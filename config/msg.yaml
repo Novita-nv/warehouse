@@ -1,0 +1,71 @@
+- name: SUCCESS
+  status: 200
+  message:
+    - lang: id
+      text: Sukses
+    - lang: en
+      text: Success
+
+- name: OK
+  status: 200
+  message:
+    - lang: id
+      text: ok
+    - lang: en
+      text: ok
+
+- name: VALIDATION-ERROR
+  status: 400
+  message:
+    - lang: id
+      text: Parameter tidak sesuai
+    - lang: en
+      text: The request parameter invalid
+
+- name: VALIDATION-SIGNATURE
+  status: 400
+  message:
+    - lang: id
+      text: Signature tidak valid
+    - lang: en
+      text: Signature incorrect
+
+- name: UNAUTHORIZED
+  status: 401
+  message:
+    - lang: id
+      text: Gagal autentikasi
+    - lang: en
+      text: Authentication failure
+
+- name: TIMEOUT
+  status: 408
+  message:
+    - lang: id
+      text: Timeout
+    - lang: en
+      text: Timeout
+
+- name: REACH-MAX-LIMIT
+  status: 429
+  message:
+    - lang: id
+      text: Mencapai limit maximal
+    - lang: en
+      text: Reach max limit
+
+- name: ERROR
+  status: 500
+  message:
+    - lang: id
+      text: Telah terjadi kesalahan, silahkan coba lagi
+    - lang: en
+      text: Something went wrong
+
+- name: BUSY
+  status: 503
+  message:
+    - lang: id
+      text: Server sedang sibuk
+    - lang: en
+      text: Server too busy
