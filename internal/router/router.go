@@ -12,7 +12,8 @@ import (
 	"gitlab.privy.id/go_graphql/internal/consts"
 	"gitlab.privy.id/go_graphql/internal/handler"
 	"gitlab.privy.id/go_graphql/internal/middleware"
-	repositories "gitlab.privy.id/go_graphql/internal/repositories/role"
+	repositoriesRole "gitlab.privy.id/go_graphql/internal/repositories/role"
+	repositoriesProduct "gitlab.privy.id/go_graphql/internal/repositories/product"
 	"gitlab.privy.id/go_graphql/internal/ucase"
 	"gitlab.privy.id/go_graphql/pkg/logger"
 	"gitlab.privy.id/go_graphql/pkg/msgx"
@@ -24,6 +25,7 @@ import (
 
 	ucaseContract "gitlab.privy.id/go_graphql/internal/ucase/contract"
 	"gitlab.privy.id/go_graphql/internal/ucase/role"
+	"gitlab.privy.id/go_graphql/internal/ucase/product"
 )
 
 type router struct {
@@ -159,12 +161,13 @@ func (rtr *router) Route() *routerkit.Router {
 
 	db := bootstrap.RegistryPostgreSQLMasterSlave(rtr.config.WriteDB, rtr.config.ReadDB, rtr.config.App.Timezone)
 	//Repository
-	roleRepo := repositories.NewRoleRepo(db)
-
-
+	roleRepo := repositoriesRole.NewRoleRepo(db)
+	productRepo := repositoriesProduct.NewProductRepo(db)
 
 	//Ucase
 	createRoleUseCase := role.NewCreateRole(roleRepo)
+	createProductUseCase := product.NewCreateProduct(productRepo)
+	getProductUsecase := product.NewGetProducts(productRepo)
 
 	//Route
 
@@ -173,6 +176,16 @@ func (rtr *router) Route() *routerkit.Router {
 		handler.HttpRequest,
 		createRoleUseCase,
 	)).Methods(http.MethodPost)
+
+	root.HandleFunc("/api/v1/product/create", rtr.handle(
+		handler.HttpRequest,
+		createProductUseCase,
+	)).Methods(http.MethodPost)
+
+	root.HandleFunc("/api/v1/products", rtr.handle(
+		handler.HttpRequest,
+		getProductUsecase,
+	)).Methods(http.MethodGet)
 
 
 
