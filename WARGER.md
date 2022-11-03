@@ -5,14 +5,32 @@ A simple application to manage warehouse records digitally and efficiently
 ---
 
 ## Tables
-1. roles
-1. users
-1. products
+1. Roles
 
-## Roles
-1. Manager
-1. Admin
-1. Sales
+| Role ID | Role Name |
+| :------ | :------ |
+| 1 | Manager |
+| 2 | Admin |
+| 3 | Sales |
+
+2. Users
+
+| User ID | Username | Password | Role |
+| :------ | :------ | :------ | :------ |
+| 1 | Syifan | ********** | Manager |
+| 2 | Arum | ********** | Admin |
+| 3 | Azka | ********** | Sales |
+
+3. Products 
+
+| Product ID | Product Name | Total
+| :------ | :------ | :------ |
+| 1 | Maybelline Brow Cara | 7 |
+| 2 | Maybelline Fit Me Powder | 6 |
+| 3 | Luxcrime Two Way Cake | 7 |
+
+
+===
 
 ## User Access
 1. Managers can access and view product list data and product stock
@@ -20,6 +38,8 @@ A simple application to manage warehouse records digitally and efficiently
 1. Sales can access the application and view product list data and product stock
 
 
+
 ---
 
-> How you are in this moment, both mentally and emotionally, manifests in every action you perform.
+
+> Whatever you do or give without love in your heart, it just amounts to labor.

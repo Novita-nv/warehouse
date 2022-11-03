@@ -33,7 +33,7 @@ func (r *productRepo) CreateProduct(ctx context.Context, input *entity.ProductCr
 }
 
 func (r *productRepo) GetProducts(ctx context.Context) ([]entity.ProductResponse, error) {
-	query := `SELECT product_name, product_in, product_out, total, user_id, created_at, updated_at, deleted_at  FROM products WHERE deleted_at IS NULL;`
+	query := `SELECT product_id, product_name, product_in, product_out, total, user_id, created_at, updated_at, deleted_at  FROM products WHERE deleted_at IS NULL;`
 
 	rows, err := r.db.QueryRows(ctx, query)
 	if err != nil {
@@ -43,7 +43,7 @@ func (r *productRepo) GetProducts(ctx context.Context) ([]entity.ProductResponse
 	var products []entity.ProductResponse
 	for rows.Next() {
 		var product entity.ProductResponse
-		err := rows.Scan(&product.ProductName, &product.ProductIn, &product.ProductOut, &product.Total, &product.User, &product.CreatedAt, &product.UpdatedAt, &product.DeletedAt)
+		err := rows.Scan(&product.ProductId, &product.ProductName, &product.ProductIn, &product.ProductOut, &product.Total, &product.User, &product.CreatedAt, &product.UpdatedAt, &product.DeletedAt)
 		if err != nil {
 			return nil, err
 		}

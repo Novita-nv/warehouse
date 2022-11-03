@@ -12,8 +12,8 @@ import (
 	"gitlab.privy.id/go_graphql/internal/consts"
 	"gitlab.privy.id/go_graphql/internal/handler"
 	"gitlab.privy.id/go_graphql/internal/middleware"
-	repositoriesRole "gitlab.privy.id/go_graphql/internal/repositories/role"
 	repositoriesProduct "gitlab.privy.id/go_graphql/internal/repositories/product"
+	repositoriesRole "gitlab.privy.id/go_graphql/internal/repositories/role"
 	"gitlab.privy.id/go_graphql/internal/ucase"
 	"gitlab.privy.id/go_graphql/pkg/logger"
 	"gitlab.privy.id/go_graphql/pkg/msgx"
@@ -24,8 +24,8 @@ import (
 	//"gitlab.privy.id/go_graphql/internal/ucase/example"
 
 	ucaseContract "gitlab.privy.id/go_graphql/internal/ucase/contract"
-	"gitlab.privy.id/go_graphql/internal/ucase/role"
 	"gitlab.privy.id/go_graphql/internal/ucase/product"
+	"gitlab.privy.id/go_graphql/internal/ucase/role"
 )
 
 type router struct {
@@ -90,7 +90,10 @@ func (rtr *router) handle(hfn httpHandlerFunc, svc ucaseContract.UseCase, mdws .
 
 // response prints as a json and formatted string for DGP legacy
 func (rtr *router) response(w http.ResponseWriter, resp appctx.Response) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
+	w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT")
 	w.Header().Set(consts.HeaderContentTypeKey, consts.HeaderContentTypeJSON)
+
 	resp.Generate()
 	w.WriteHeader(resp.Code)
 	w.Write(resp.Byte())
@@ -171,7 +174,6 @@ func (rtr *router) Route() *routerkit.Router {
 
 	//Route
 
-	
 	root.HandleFunc("/api/v1/role/create", rtr.handle(
 		handler.HttpRequest,
 		createRoleUseCase,
@@ -186,17 +188,6 @@ func (rtr *router) Route() *routerkit.Router {
 		handler.HttpRequest,
 		getProductUsecase,
 	)).Methods(http.MethodGet)
-
-
-
-
-
-
-
-
-
-
-
 
 	return rtr.router
 

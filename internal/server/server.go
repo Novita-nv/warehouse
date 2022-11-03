@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	// gohandlers "github.com/gorilla/handlers"
 	"gitlab.privy.id/go_graphql/internal/appctx"
 	"gitlab.privy.id/go_graphql/internal/consts"
 	"gitlab.privy.id/go_graphql/internal/router"
@@ -36,6 +37,7 @@ type httpServer struct {
 func (h *httpServer) Run(ctx context.Context) error {
 	var err error
 
+	// ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
 	server := http.Server{
 		Addr:         fmt.Sprintf("0.0.0.0:%d", h.config.App.Port),
 		Handler:      h.router.Route(),
